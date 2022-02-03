@@ -320,10 +320,6 @@ namespace DNSRedir
         {
             string sIpAddress = "ERR";
 
-            // if the hostname is really an ipaddress, just return it
-            //if (isProperIp(hostName))
-            //    return hostName;
-
             try
             {
                 IPHostEntry IPEntry = Dns.GetHostEntry(hostName);
@@ -331,8 +327,8 @@ namespace DNSRedir
                 {
                     if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                     {
+                        // return last available IPv4 address
                         sIpAddress = ip.ToString();
-                        break; // return first ipadress
                     }
                 }
             }
@@ -390,8 +386,8 @@ namespace DNSRedir
                 {
                     if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                     {
+                        // return last available IPv4 address
                         sIpAddress = ip.ToString();
-                        break; // return first ipadress
                     }
                 }
                 if (sIpAddress.Length == 0)
